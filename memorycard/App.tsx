@@ -5,23 +5,30 @@
  * @format
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   SafeAreaView,
   ScrollView,
   StatusBar,
+  Text,
   // StyleSheet,
   useColorScheme,
 } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { Board } from './src/component/Board';
+import { observer } from 'mobx-react-lite';
+import { game } from './src/model/Game';
 
-function App(): JSX.Element {
+const App = observer(() => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+
+  useEffect(() => {
+    game.startGame() // İlk açıldığında oyunu başlatır
+  }, [])
 
   return (
     <SafeAreaView style={backgroundStyle}>
@@ -31,11 +38,13 @@ function App(): JSX.Element {
       />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic">
-        <Board />
+        <Text>{game.moves}</Text>
+        <Board cards={game.cards} />
       </ScrollView>
     </SafeAreaView>
   );
 }
+)
 
 // const styles = StyleSheet.create({
 
