@@ -12,22 +12,25 @@ interface CardViewProps {
 
 // CardViewProps interfaceini kullanarak özelliklerini (props) değişkenlere "ayırma" işlemi yapar. 
 // Observer izlenen verilere bağlar, değişikliklere yanıt olarak tekrar render eder.
-export const CardView = observer(({ card, cardSize, gapSize }: CardViewProps) => {
-    return (
-        <View
-            style={[
-                styles.container,
-                { width: cardSize, height: cardSize, margin: gapSize },
-            ]}>
-            <Pressable onPress={() => {
-                card.makeVisible()
-            }}>
-                <Text>{card.type}</Text>
-                <Text>isVisible: {card.isVisible.toString()}</Text>
+export const CardView = observer(
+    ({ card, cardSize, gapSize }: CardViewProps) => {
+        return (
+            <Pressable
+                style={[
+                    styles.container,
+                    { width: cardSize, height: cardSize, margin: gapSize },
+                ]}
+                onPress={() => {
+                    card.makeVisible()
+                }}>
+                <View>
+                    <Text>{card.type}</Text>
+                    <Text>isVisible: {card.isVisible.toString()}</Text>
+                </View>
             </Pressable>
-        </View>
-    )
-})
+        )
+    },
+)
 
 const styles = StyleSheet.create({
     container: {

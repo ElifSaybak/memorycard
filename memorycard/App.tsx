@@ -11,7 +11,7 @@ import {
   ScrollView,
   StatusBar,
   Text,
-  // StyleSheet,
+  StyleSheet,
   useColorScheme,
 } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
@@ -38,7 +38,7 @@ const App = observer(() => {
       />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic">
-        <Text>{game.moves}</Text>
+        <Text style={styles.moves}>{game.moves} moves</Text>
         <Board cards={game.cards} />
       </ScrollView>
     </SafeAreaView>
@@ -46,8 +46,13 @@ const App = observer(() => {
 }
 )
 
-// const styles = StyleSheet.create({
-
-// });
+const styles = StyleSheet.create({
+  moves: {
+    fontSize: 22,
+    marginVertical: 16,
+    marginHorizontal: 16,
+    fontWeight: '600',
+  }
+});
 
 export default App;
