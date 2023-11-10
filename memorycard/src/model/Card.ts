@@ -1,4 +1,4 @@
-import { makeAutoObservable, runInAction } from 'mobx'
+import { action, makeObservable, observable, runInAction } from 'mobx'
 import { CardType } from './CardType'
 import { Game } from './Game'
 import { CardState } from './CardState'
@@ -15,18 +15,20 @@ export class Card {
   state: CardState = CardState.Invisible // Kartın başlangıç durumu CardState.Invisible. Bu başlangıçta görünmez olduğu anlamına gelir.
   game: Game // kartın ait olduğu oyunun bir referansını tutar.
 
-  // Bu, Card sınıfının yapıcı metodudur. Bir Card nesnesi oluşturulurken CardType tipinden bir type parametresi alır ve bu parametreyi sınıfın type özelliğine atar.
+  // Bu, Card sınıfının yapıcı metodudur.
   constructor(type: CardType, game: Game) {
-    // Otomatik olarak izlenebilir yapmak için MobX tarafından kullanılan bir fonksiyon
-    makeAutoObservable(this, {
-      // type ve game özelliklerini izleme! X - değerler değişirse MobX tarafından herhangi bir eylem gerçekleştirmez
-      type: false,
-      game: false,
-      backgroundColor: false,
+    // Card sınıfının özelliklerini ve metodlarını MobX'in reaktif sistemine entegre eder.
+    makeObservable(this, {
+      // makeVisible, makeMatched ve hide methodları action = uygulamanın durumunu değiştirebileceğini ve bu değişikliklerin MobX taeafından izleyeceğini gösterir.
+      state: observable,
+      makeVisible: action,
+      makeMatched: action,
+      hide: action,
     })
 
-    this.type = type
-    this.game = game
+    // Yapıcı fonksiyonda alınan parametreler (type,game), sınıfın özelliklerine atanır.
+    this.type = type // type parametresi, CardType tipindendir.
+    this.game = game // game parametresi, Game tipindendir.
   }
 
   onClick() {

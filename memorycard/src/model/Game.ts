@@ -1,4 +1,4 @@
-import { autorun, makeAutoObservable } from 'mobx'
+import { action, autorun, computed, makeAutoObservable, observable } from 'mobx'
 import { generateInitialCards } from './generateInitialCards'
 import { Card } from './Card'
 import reactotron from 'reactotron-react-native'
@@ -11,7 +11,13 @@ export class Game {
   // Böylece, değişiklikler MobX tarafından izlenir ve ilgili bileşenler otomatik olarak yeniden render edilir.
   constructor() {
     makeAutoObservable(this, {
-      visibleCards: false,
+      // MobX'in reaktif sistemine entegre eder
+      cards: observable, // kartlardaki değişiklikleri izler
+      clicks: observable, // tıklanma sayısını izler
+      startGame: action, // uygulamanın durumunu değiştirebileceğini ifade eder
+      onClick: action, // kullanıcı etkileşimlerine bağlı uygulamanın durumunu değiştirebileceğini ifade eder
+      moves: computed, // değerin diğer gözlemlenebilir özlelliklere bağlı olarak hesaplanan bir değer olduğu anlamına gelir.
+      isCompleted: computed, // belli koşullara bağlı olarak hesaplanır
     })
   }
 
