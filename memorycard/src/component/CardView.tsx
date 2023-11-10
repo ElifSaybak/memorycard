@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { Card } from '../model/Card'
 import { observer } from 'mobx-react-lite'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import { CardState } from '../model/CardState'
 
 // Bu interface, CardView bileşenine geçirilmesi gereken özelliklerin şeklini tanımlar.
 interface CardViewProps {
@@ -19,12 +20,17 @@ export const CardView = observer(
             <Pressable
                 style={[
                     styles.container,
-                    { width: cardSize, height: cardSize, margin: gapSize },
+                    {
+                        width: cardSize,
+                        height: cardSize,
+                        margin: gapSize,
+                        backgroundColor: card.backgroundColor,
+                    },
                 ]}
                 onPress={() => {
-                    card.makeVisible()
+                    card.onClick()
                 }}>
-                {card.isVisible && (
+                {card.state !== CardState.Invisible && (
                     <View style={styles.center}>
                         <Icon name={card.type} size={30} color="#fff" />
                         <Text>{card.type}</Text>
@@ -37,8 +43,6 @@ export const CardView = observer(
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#cccccc',
-        borderWidth: 1,
         borderRadius: 8,
         borderColor: 'brown',
         padding: 10,
