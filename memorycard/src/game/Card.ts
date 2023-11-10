@@ -3,12 +3,12 @@ import { CardType } from './CardType'
 import { Game } from './Game'
 import { CardState } from './CardState'
 import reactotron from 'reactotron-react-native'
+import { NO_MATCH_ANIMATION_DURATION } from '../component/CardView'
 
 const BACKGROUND_COLOR_INVISIBLE = '#3D5161'
 const BACKGROUND_COLOR_VISIBLE = '#02B3E4'
 const BACKGROUND_COLOR_MATCHED = '#02CCBA'
 const BACKGROUND_COLOR_NOT_MATCHED = ' rgb(233,93,93)'
-
 export class Card {
   // Card model sınıfı
   type: CardType // Kartın tipini tutar ve CardType enum'ından bir değer alır. Her kartın bir tipi olmalıdır ve bu, kartın hangi resme karşılık geldiğini belirleyecektir.
@@ -56,7 +56,7 @@ export class Card {
         // runInAction, MobX ile durum değişikliliğini işlemek içindir.
         this.state = CardState.Invisible
       })
-    }, 1000)
+    }, NO_MATCH_ANIMATION_DURATION)
   }
 
   // kartın tipi methodun ait oldugu nesnenin tipi ile eşleşiyor mu (true/false)
