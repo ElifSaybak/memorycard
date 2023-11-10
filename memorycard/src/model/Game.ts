@@ -2,7 +2,6 @@ import { autorun, makeAutoObservable } from 'mobx'
 import { generateInitialCards } from './generateInitialCards'
 import { Card } from './Card'
 import reactotron from 'reactotron-react-native'
-import { CardState } from './CardState'
 
 export class Game {
   cards: Card[] = [] // kartların tutulduğu dizi
@@ -29,7 +28,7 @@ export class Game {
       return
     }
     this.clicks++ //tıklama sayısını arttırır
-    card.state = CardState.Visible // kart durumunu günceller
+    card.makeVisible()
     this.evaluateMatch()
   }
 
@@ -43,11 +42,11 @@ export class Game {
     }
 
     // ki görünür kartın tipinin aynı olup olmadığı kontrol edilir
-    if (visibleCards[0].type === visibleCards[1].type) {
+    if (visibleCards[0].matches(visibleCards[1])) {
       // her iki kartın da durumu CardState.Matched olarak güncellenir.
       // Bu, kartların eşleştiğini ve artık eşleşmiş olarak işaretlendiğini gösterir.
-      visibleCards[0].state = CardState.Matched
-      visibleCards[1].state = CardState.Matched
+      visibleCards[0].makeMatched()
+      visibleCards[1].makeMatched()
     } else {
       // Eğer kartlar eşleşmezse, her iki kartın da hide metodunu çağırarak kartları gizli duruma getirir
       visibleCards[0].hide()
@@ -60,18 +59,19 @@ export class Game {
   }
 
   get isCompleted(): boolean {
+    // this.cards dizisindeki her kart için isMatched ifadesini kontrol eder.
     return this.cards.every((card) => card.isMatched)
   }
 
   // helpers (noMatchedCards ve visibleCards yardımcı fonksiyonlar)
   noMatchedCards(): Card[] {
-    // this.cards dizisindeki kartları filtreler ve sadece state özelliği CardState.NotMatched olan kartları döndürür.
-    return this.cards.filter((card) => card.state === CardState.NotMatched)
+    // this.cards dizisindeki kartları filtreler ve sadece isNotMatched olan kartları döndürür.
+    return this.cards.filter((card) => card.isNotMatched)
   }
 
   visibleCards(): Card[] {
-    // this.cards dizisindeki kartları filtreler ve sadece state özelliği CardState.Visible olan kartları döndürür.
-    return this.cards.filter((card) => card.state === CardState.Visible)
+    // this.cards dizisindeki kartları filtreler ve sadece visible olan kartları döndürür.
+    return this.cards.filter((card) => card.isVisible)
   }
 }
 

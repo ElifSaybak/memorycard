@@ -30,24 +30,65 @@ export class Card {
   }
 
   onClick() {
-    if (this.state === CardState.Invisible) { // Kart invisible ise game.onClick çağırır.
+    if (this.state === CardState.Invisible) {
+      // Kart invisible ise game.onClick çağırır.
       this.game.onClick(this)
     } else {
       reactotron.log!('onClick() ignored')
     }
   }
 
+  makeVisible() {
+    this.state = CardState.Visible // kartın durumunu visible yap
+  }
+
+  makeMatched() {
+    this.state = CardState.Matched // kartın durumunu matched yap
+  }
+
   hide() {
     this.state = CardState.NotMatched // kartın durumunu önce nomatched olarak değiştirir
-    setTimeout(() => { // 1 sn sonra kartın durumunu invisible olarak değiştirir.
-      runInAction(() => { // runInAction, MobX ile durum değişikliliğini işlemek içindir.
+    setTimeout(() => {
+      // 1 sn sonra kartın durumunu invisible olarak değiştirir.
+      runInAction(() => {
+        // runInAction, MobX ile durum değişikliliğini işlemek içindir.
         this.state = CardState.Invisible
       })
     }, 1000)
   }
 
+  // kartın tipi methodun ait oldugu nesnenin tipi ile eşleşiyor mu (true/false)
+  matches(card: Card): boolean {
+    return card.type === this.type
+  }
+
+  // isInVisible getter methodu
+  // kart nesnesinin  mevcut state özelliği CardState.Invisible ile eşit mi? (true/false)
+  get isInVisible(): boolean {
+    return this.state === CardState.Invisible
+  }
+
+  // isVisible getter methodu
+  // kart nesnesinin  mevcut state özelliği CardState.Visible ile eşit mi? (true/false)
+  get isVisible(): boolean {
+    return this.state === CardState.Visible
+  }
+
+  // isMatched getter methodu
+  // kart nesnesinin  mevcut state özelliği CardState.Matched ile eşit mi? (true/false)
+  get isMatched(): boolean {
+    return this.state === CardState.Matched
+  }
+
+  // isNotMatched getter methodu
+  // kart nesnesinin  mevcut state özelliği CardState.NotMatched ile eşit mi? (true/false)
+  get isNotMatched(): boolean {
+    return this.state === CardState.NotMatched
+  }
+
   // Getter Methodu
-  get backgroundColor(): string { // kartın durumuna göre arka plan renkleri döndürür.
+  get backgroundColor(): string {
+    // kartın durumuna göre arka plan renkleri döndürür.
     switch (this.state) {
       case CardState.Invisible:
         return BACKGROUND_COLOR_INVISIBLE
