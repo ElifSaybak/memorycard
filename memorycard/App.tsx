@@ -17,7 +17,7 @@ import {
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { Board } from './src/component/Board';
 import { observer } from 'mobx-react-lite';
-import { game } from './src/model/Game';
+import { game } from './src/game/Game';
 
 const App = observer(() => {
   const isDarkMode = useColorScheme() === 'dark';

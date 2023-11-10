@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, useWindowDimensions, View } from 'react-native'
-import { Card } from '../model/Card'
+import { Card } from '../game/Card'
 import { CardView } from './CardView'
 
 export function Board({ cards }: { cards: Card[] }) {
