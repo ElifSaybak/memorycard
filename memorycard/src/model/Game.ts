@@ -55,8 +55,12 @@ export class Game {
     }
   }
 
-  get moves() {
+  get moves(): number {
     return Math.floor(this.clicks / 2) // Tıklama sayısının yarısını alır (her bir hareket iki tıklama olarak düşünülür).
+  }
+
+  get isCompleted(): boolean {
+    return this.cards.every((card) => card.isMatched)
   }
 
   // helpers (noMatchedCards ve visibleCards yardımcı fonksiyonlar)
