@@ -25,6 +25,7 @@ export class Game {
     reactotron.log!('startGame()')
     // generateInitialCards fonksiyonunu çağırır kartları karıştırır.
     this.cards = generateInitialCards()
+    this.clicks = 0
   }
 
   onClick(card: Card) {

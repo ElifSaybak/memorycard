@@ -10,9 +10,6 @@ for (const cardType in CardType) {
   cardTypes.push(aCardType)
 }
 
-// Her kart tipi için Card sınıfından bir nesne oluşturulur ve cards adında bir diziye atanır
-const cards: Card[] = cardTypes.map((cardType) => new Card(cardType, game))
-
 // Kartların karıştırılması ve rastgele bir başlangıç durumu için fonksiyon
 // <T> Tür parametresi - herhangi bir türdeki diziyi kabul eder ve işler.
 function shuffleArray<T>(array: T[]): T[] {
@@ -26,5 +23,7 @@ function shuffleArray<T>(array: T[]): T[] {
 }
 
 export function generateInitialCards(): Card[] {
+  // Her kart tipi için Card sınıfından bir nesne oluşturulur ve cards adında bir diziye atanır
+  const cards: Card[] = cardTypes.map((cardType) => new Card(cardType, game))
   return shuffleArray(cards)
 }

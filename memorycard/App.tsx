@@ -13,6 +13,8 @@ import {
   Text,
   StyleSheet,
   useColorScheme,
+  View,
+  Pressable
 } from 'react-native';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { Board } from './src/component/Board';
@@ -37,7 +39,15 @@ const App = observer(() => {
         backgroundColor={backgroundStyle.backgroundColor}
       />
       <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <Text style={styles.text}>{game.moves} moves</Text>
+        <View style={styles.row}>
+          <Text style={styles.text}>{game.moves} moves</Text>
+          <Pressable
+            onPress={() => {
+              game.startGame() // baştan başlat
+            }}>
+            <Text style={styles.text}>Restart</Text>
+          </Pressable>
+        </View>
         <Board cards={game.cards} />
         {game.isCompleted && <Text style={styles.text}>Congratulations!</Text>}
       </ScrollView>
@@ -47,6 +57,9 @@ const App = observer(() => {
 )
 
 const styles = StyleSheet.create({
+  row: {
+    flexDirection: 'row',
+  },
   text: {
     fontSize: 22,
     fontWeight: '600',
