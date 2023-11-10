@@ -2,10 +2,12 @@ import { action, autorun, computed, makeAutoObservable, observable } from 'mobx'
 import { generateInitialCards } from './generateInitialCards'
 import { Card } from './Card'
 import reactotron from 'reactotron-react-native'
+import { Timer } from './Timer'
 
 export class Game {
   cards: Card[] = [] // kartların tutulduğu dizi
   clicks = 0 // tıklama sayısı - başlangıçta 0
+  timer = new Timer()
 
   // Sınıfın tüm özelliklerini ve eylemlerini otomatik olarak izlenebilir yapar.
   // Böylece, değişiklikler MobX tarafından izlenir ve ilgili bileşenler otomatik olarak yeniden render edilir.
@@ -26,10 +28,17 @@ export class Game {
     // generateInitialCards fonksiyonunu çağırır kartları karıştırır.
     this.cards = generateInitialCards()
     this.clicks = 0
+    this.timer.reset()
   }
 
   onClick(card: Card) {
     reactotron.log!('onClick() card', card.type)
+
+    if (!this.timer.isStarted) {
+      // zamanlayıcı başlamadıysa başlat
+      this.timer.start()
+    }
+
     if (this.noMatchedCards().length > 0) {
       // eşleşmeyen kart varsa işlem yapmadan döner
       return
@@ -54,6 +63,10 @@ export class Game {
       // Bu, kartların eşleştiğini ve artık eşleşmiş olarak işaretlendiğini gösterir.
       visibleCards[0].makeMatched()
       visibleCards[1].makeMatched()
+
+      if (this.isCompleted) { // oyun tamamlandıysa zamanlayıcıyı durdur.
+        this.timer.stop()
+      }
     } else {
       // Eğer kartlar eşleşmezse, her iki kartın da hide metodunu çağırarak kartları gizli duruma getirir
       visibleCards[0].hide()
