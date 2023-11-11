@@ -20,6 +20,7 @@ import { Board } from './src/component/Board';
 import { observer } from 'mobx-react-lite';
 import { game } from './src/game/Game';
 import { WinOverlay } from './src/component/WinOverlay';
+import { useIsPortrait } from './src/util/useIsPortrait';
 
 const App = observer(() => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -28,27 +29,37 @@ const App = observer(() => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+  const fontSize = useIsPortrait() ? 22 : 18
+  const textStyle = { fontSize }
+
   useEffect(() => {
     game.startGame() // İlk açıldığında oyunu başlatır
   }, [])
 
   return (
-    <SafeAreaView style={[styles.container, backgroundStyle]}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <View style={styles.container}>
-        {/* Oyun tamamlandıktan sonra ekrana gelecek olan bileşen */}
-        <WinOverlay show={game.isCompleted} onClose={() => game.startGame()} /> 
+    <SafeAreaView style={[styles.fullHeight, backgroundStyle]}>
+      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      {/*  WinOverlay Oyun tamamlandıktan sonra ekrana gelecek olan bileşen */}
+      <WinOverlay show={game.isCompleted} onClose={() => game.startGame()} />
+      <View style={styles.fullHeight}>
         <View style={styles.row}>
-          <Text style={styles.text}>{game.moves} moves</Text>
-          <Text style={styles.text}>{game.timer.seconds} seconds</Text>
+          <Text style={[styles.text, textStyle]}>Memory Game</Text>
+          <Pressable
+            onPress={() => {
+              // Modal göster
+            }}
+          >
+            <Text style={[styles.text, textStyle]}>Info</Text>
+          </Pressable>
+        </View>
+        <View style={styles.row}>
+          <Text style={[styles.text, textStyle]}>{game.moves} moves</Text>
+          <Text style={[styles.text, textStyle]}>{game.timer.seconds} seconds</Text>
           <Pressable
             onPress={() => {
               game.startGame() // baştan başlat
             }}>
-            <Text style={styles.text}>Restart</Text>
+            <Text style={[styles.text, textStyle]}>Restart</Text>
           </Pressable>
         </View>
         <Board cards={game.cards} />
@@ -59,16 +70,20 @@ const App = observer(() => {
 )
 
 const styles = StyleSheet.create({
-  container: {
+  fullHeight: {
     flex: 1,
+  },
+  centerVertical: {
+    justifyContent: 'center',
   },
   row: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   text: {
     fontSize: 22,
     fontWeight: '600',
-    marginVertical: 16,
+    marginBottom: 16,
     marginHorizontal: 16,
   },
 });
