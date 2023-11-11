@@ -5,6 +5,7 @@ import { observer } from 'mobx-react-lite'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Animated, { useAnimatedStyle, useSharedValue, withSequence, withTiming } from "react-native-reanimated"
 import { cardView } from '../style/styles'
+import { Color } from '../style/Color'
 
 const MATCH_STEP_DURATION = 120
 const NO_MATCH_STEP_DURATION = 120
@@ -122,8 +123,8 @@ export const CardView = observer(
                     }}>
                     {!card.isInVisible && ( // kart görünmeyen durumda değilse (görünürse)
                         <View style={cardView.center}>
-                            <Icon name={card.type} size={30} color="#fff" />
-                            <Text style={cardView.textAlign}>{card.type}</Text>
+                            <Icon name={card.type} size={30} color={Color.white} />
+                            <Text style={cardView.text}>{card.type}</Text>
                         </View>
                     )}
                 </Pressable>

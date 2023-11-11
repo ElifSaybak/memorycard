@@ -73,8 +73,9 @@ const cardView = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  textAlign: {
+  text: {
     textAlign: 'center',
+    maxWidth: "80%"
   },
 })
 
