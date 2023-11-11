@@ -43,6 +43,7 @@ const App = observer(() => {
       {
         game.isCompleted && (
           <WinOverlayTouch
+            game={game}
             onClose={() => {
               game.startGame()
             }}
