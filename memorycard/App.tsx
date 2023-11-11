@@ -19,7 +19,7 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { Board } from './src/component/Board';
 import { observer } from 'mobx-react-lite';
 import { game } from './src/game/Game';
-import { WinOverlay } from './src/component/WinOverlay';
+import { WinOverlayTouch } from './src/component/WinOverlayTouch';
 import { useIsPortrait } from './src/util/useIsPortrait';
 
 const App = observer(() => {
@@ -40,7 +40,15 @@ const App = observer(() => {
     <SafeAreaView style={[styles.fullHeight, backgroundStyle]}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       {/*  WinOverlay Oyun tamamlandıktan sonra ekrana gelecek olan bileşen */}
-      <WinOverlay show={game.isCompleted} onClose={() => game.startGame()} />
+      {
+        game.isCompleted && (
+          <WinOverlayTouch
+            onClose={() => {
+              game.startGame()
+            }}
+          />
+        )
+      }
       <View style={styles.fullHeight}>
         <View style={styles.row}>
           <Text style={[styles.text, textStyle]}>Memory Game</Text>

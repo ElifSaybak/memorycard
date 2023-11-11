@@ -5,7 +5,6 @@ import {
     GestureResponderEvent,
     PanResponder,
     PanResponderGestureState,
-    Pressable,
     StyleSheet,
     Text,
     useWindowDimensions,
@@ -14,46 +13,56 @@ import {
 import { Color } from '../style/Color'
 
 interface Props {
-    show: boolean
     onClose: () => void
 }
 
-export function WinOverlayTouch({ show, onClose }: Props) {
-    const { height: screenHeight } = useWindowDimensions()
+export function WinOverlayTouch({ onClose }: Props) {
+    // useWindowDimensions hook'u, cihazın ekran boyutlarını almak için kullanılıyor. 
+    const { height: screenHeight } = useWindowDimensions() // screenHeight değişkeni, ekranın yüksekliğini saklar.
 
+    // animatedBottomRef referansı, Animated.Value kullanılarak animasyonlu bir değer saklar.
     const animatedBottomRef = React.useRef(new Animated.Value(screenHeight))
 
+    // Dokunmatik Hareketlerin Kontrolü
     const panResponder = React.useRef(
-        PanResponder.create({
+        PanResponder.create({ // dokunmatik hareketlerin nasıl ele alınacağını tanımlanır.
             onStartShouldSetPanResponder: () => true,
-            onStartShouldSetPanResponderCapture: () => true,
+            onStartShouldSetPanResponderCapture: () => true, //
             onMoveShouldSetPanResponder: () => true,
             onMoveShouldSetPanResponderCapture: () => true,
 
-            onPanResponderGrant: (
+            onPanResponderGrant: ( // kullanıcı ekranı basılı tuttuğunda
                 _event: GestureResponderEvent,
                 _gestureState: PanResponderGestureState,
             ) => {
                 // @ts-ignore
                 console.log('_value', animatedBottomRef.current._value)
                 // @ts-ignore
-                animatedBottomRef.current.setOffset(animatedBottomRef.current._value)
+                animatedBottomRef.current.setOffset(animatedBottomRef.current._value) // mevcut değerini kaydeder ve offset ayarlar.
             },
 
-            onPanResponderMove: (
+            onPanResponderMove: ( // kullanıcı ekran üzerinde hareket ettiğinde tetiklenir.
                 event: GestureResponderEvent,
                 gestureState: PanResponderGestureState,
             ) => {
-                animatedBottomRef.current.setValue(-gestureState.dy)
+                animatedBottomRef.current.setValue(-gestureState.dy) // kullanıcının hareketine bağlı günceller
             },
 
-            onPanResponderRelease: (
+            onPanResponderRelease: ( // Kullanıcı dokunmatik hareketi bıraktığında tetiklenir. 
                 event: GestureResponderEvent,
                 gestureState: PanResponderGestureState,
             ) => {
+                // Eğer kullanıcı belirli bir hızda veya mesafede ekranı yukarı kaydırdıysa, ekranı kapatır
                 if (gestureState.dy < -180 || Math.abs(gestureState.vy) > 0.5) {
-                    onClose()
-                } else {
+                    Animated.timing(animatedBottomRef.current, {
+                        toValue: screenHeight,
+                        duration: 300,
+                        easing: Easing.linear,
+                        useNativeDriver: false,
+                    }).start(() => {
+                        onClose()
+                    })
+                } else { // Aksi halde, ekranın pozisyonunu sıfırlar.
                     animatedBottomRef.current.flattenOffset()
 
                     Animated.timing(animatedBottomRef.current, {
@@ -67,23 +76,15 @@ export function WinOverlayTouch({ show, onClose }: Props) {
         }),
     ).current
 
+    // bileşen render edildiğinde ekranın altından yukarı doğru çıkması için animasyonu başlatır.
     React.useEffect(() => {
-        if (show) {
-            Animated.timing(animatedBottomRef.current, {
-                toValue: 0,
-                duration: 1000,
-                easing: Easing.cubic,
-                useNativeDriver: false,
-            }).start()
-        } else {
-            Animated.timing(animatedBottomRef.current, {
-                toValue: screenHeight,
-                duration: 300,
-                easing: Easing.linear,
-                useNativeDriver: false,
-            }).start()
-        }
-    }, [show, screenHeight])
+        Animated.timing(animatedBottomRef.current, {
+            toValue: 0,
+            duration: 800,
+            easing: Easing.out(Easing.cubic),
+            useNativeDriver: false, // 'top' is not supported by native animated module
+        }).start()
+    }, [screenHeight])
 
     const bottom = animatedBottomRef.current
 
@@ -92,9 +93,6 @@ export function WinOverlayTouch({ show, onClose }: Props) {
             <Text style={styles.title}>Congratulations! You won!</Text>
             <Text style={styles.text}>With X moves and X seconds.</Text>
             <Text style={styles.text}>Woooooo!</Text>
-            <Pressable style={styles.button} onPress={() => onClose()}>
-                <Text style={styles.buttonText}>Play again!</Text>
-            </Pressable>
             <View {...panResponder.panHandlers} style={styles.moveUp}>
                 <Text>Move up</Text>
             </View>
@@ -104,7 +102,7 @@ export function WinOverlayTouch({ show, onClose }: Props) {
 
 const styles = StyleSheet.create({
     main: {
-        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+        backgroundColor: 'rgba(255, 255, 255, 0.85)',
         padding: 10,
         zIndex: 1,
         position: 'absolute',
@@ -144,5 +142,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: Color.red,
         borderRadius: 50,
+        marginTop: 50,
     },
 })
