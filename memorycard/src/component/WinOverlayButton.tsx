@@ -15,7 +15,7 @@ interface Props { // Bu interface, bileşene geçirilecek prop'ları tanımlar.
     onClose: () => void
 }
 
-export function WinOverlay({ show, onClose }: Props) { // Props tipinden "show" ve "onClose" prop'larını alır.
+export function WinOverlayButton({ show, onClose }: Props) { // Props tipinden "show" ve "onClose" prop'larını alır.
     // useWindowDimensions hook'u, cihazın ekran boyutlarını almak için kullanılıyor. screenHeight değişkeni, ekranın yüksekliğini saklar.
     const { height: screenHeight } = useWindowDimensions()
     // animatedValue, animasyon için bir başlangıç değeri (0) ile bir Animated.Value referansı oluşturur.
