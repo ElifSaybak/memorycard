@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { Card } from '../game/Card'
 import { CardView } from './CardView'
+import { Card } from '../game/Card'
 import { GAP_SIZE, useCardSize } from '../style/sizes'
 
 export function Board({ cards }: { cards: Card[] }) {
@@ -25,9 +25,8 @@ const styles = StyleSheet.create({
     containerPortrait: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        alignSelf: "center",
         padding: GAP_SIZE / 2,
         borderRadius: 10,
-        backgroundColor: 'rgb(255, 255, 255,0.8)',
+        backgroundColor: 'rgba(255,255,255,0.8)',
     },
 })
