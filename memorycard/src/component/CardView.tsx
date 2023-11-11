@@ -91,13 +91,13 @@ function useNoMatchAnimation() {
 interface CardViewProps {
     card: Card
     cardSize: number
-    gapSize: number
+    margin: number
 }
 
 // CardViewProps interfaceini kullanarak özelliklerini (props) değişkenlere "ayırma" işlemi yapar. 
 // Observer izlenen verilere bağlar, değişikliklere yanıt olarak tekrar render eder.
 export const CardView = observer(
-    ({ card, cardSize, gapSize }: CardViewProps) => {
+    ({ card, cardSize, margin }: CardViewProps) => {
         const { runMatchAnimation, matchAnimationStyle } = useMatchAnimation()
         runMatchAnimation.value = card.isMatched //  kart eşleşme durumu(true) runMatchAnimation değerine atanır. noMatchAnimationStyle tetikler.
 
@@ -112,7 +112,7 @@ export const CardView = observer(
                         {
                             width: cardSize,
                             height: cardSize,
-                            margin: gapSize,
+                            margin: margin,
                             backgroundColor: card.backgroundColor,
                         },
                     ]}

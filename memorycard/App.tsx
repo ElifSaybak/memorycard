@@ -121,12 +121,12 @@ const styles = StyleSheet.create({
   row1: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: GAP_SIZE * 2,
+    paddingHorizontal: GAP_SIZE,
   },
   row2: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    paddingHorizontal: GAP_SIZE * 2,
+    paddingHorizontal: GAP_SIZE,
   },
   title: {
     textAlignVertical: 'center',

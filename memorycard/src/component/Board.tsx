@@ -21,7 +21,7 @@ export function Board({ cards }: { cards: Card[] }) {
                     card={card}
                     key={index}
                     cardSize={cardSize}
-                    gapSize={GAP_SIZE}
+                    margin={GAP_SIZE / 2}
                 />
             ))}
         </LinearGradient>
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         alignSelf: "center",
-        padding: GAP_SIZE,
+        padding: GAP_SIZE / 2,
         borderRadius: 10,
     },
 })
