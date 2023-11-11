@@ -31,10 +31,12 @@ export function WinOverlayTouch({ show, onClose }: Props) {
             onMoveShouldSetPanResponderCapture: () => true,
 
             onPanResponderGrant: (
-                event: GestureResponderEvent,
-                gestureState: PanResponderGestureState,
+                _event: GestureResponderEvent,
+                _gestureState: PanResponderGestureState,
             ) => {
+                // @ts-ignore
                 console.log('_value', animatedBottomRef.current._value)
+                // @ts-ignore
                 animatedBottomRef.current.setOffset(animatedBottomRef.current._value)
             },
 
@@ -42,23 +44,25 @@ export function WinOverlayTouch({ show, onClose }: Props) {
                 event: GestureResponderEvent,
                 gestureState: PanResponderGestureState,
             ) => {
-                console.log(
-                    'screenHeight',
-                    screenHeight,
-                    'gestureState.y0',
-                    gestureState.y0,
-                    'gestureState.dy',
-                    gestureState.dy,
-                    'gestureState.moveY',
-                    gestureState.moveY,
-                    'animatedBottomRef.current',
-                    animatedBottomRef.current,
-                )
                 animatedBottomRef.current.setValue(-gestureState.dy)
             },
 
-            onPanResponderRelease: () => {
-                animatedBottomRef.current.flattenOffset()
+            onPanResponderRelease: (
+                event: GestureResponderEvent,
+                gestureState: PanResponderGestureState,
+            ) => {
+                if (gestureState.dy < -180 || Math.abs(gestureState.vy) > 0.5) {
+                    onClose()
+                } else {
+                    animatedBottomRef.current.flattenOffset()
+
+                    Animated.timing(animatedBottomRef.current, {
+                        toValue: 0,
+                        duration: 100,
+                        easing: Easing.cubic,
+                        useNativeDriver: false,
+                    }).start()
+                }
             },
         }),
     ).current
@@ -74,16 +78,14 @@ export function WinOverlayTouch({ show, onClose }: Props) {
         } else {
             Animated.timing(animatedBottomRef.current, {
                 toValue: screenHeight,
-                duration: 800,
-                easing: Easing.cubic,
+                duration: 300,
+                easing: Easing.linear,
                 useNativeDriver: false,
             }).start()
         }
     }, [show, screenHeight])
 
     const bottom = animatedBottomRef.current
-
-    console.log('bottom', bottom)
 
     return (
         <Animated.View style={[styles.main, { height: screenHeight, bottom }]}>
