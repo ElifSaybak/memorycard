@@ -1,6 +1,6 @@
 // renkleri tutan  Color dizi değişkeni
 export const Color = {
-  dark: '#3d5161',
+  dark: '#2e3d49',
   blue: '#02b3e4',
   blueLight: '#bff1fe',
   teal: '#02ccba',
