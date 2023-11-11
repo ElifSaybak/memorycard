@@ -5,7 +5,7 @@
  * @format
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   SafeAreaView,
   StatusBar,
@@ -21,9 +21,12 @@ import { observer } from 'mobx-react-lite';
 import { game } from './src/game/Game';
 import { WinOverlayTouch } from './src/component/WinOverlayTouch';
 import { useIsPortrait } from './src/util/useIsPortrait';
+import { Color } from './src/style/Color';
+import { InfoModal } from './src/component/InfoModal';
 
 const App = observer(() => {
   const isDarkMode = useColorScheme() === 'dark';
+  const [showInfoModal, setShowInfoModal] = useState(false)
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -39,26 +42,21 @@ const App = observer(() => {
   return (
     <SafeAreaView style={[styles.fullHeight, backgroundStyle]}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      {/*  WinOverlay Oyun tamamlandıktan sonra ekrana gelecek olan bileşen */}
-      {
-        game.isCompleted && (
-          <WinOverlayTouch
-            game={game}
-            onClose={() => {
-              game.startGame()
-            }}
-          />
-        )
-      }
       <View style={styles.fullHeight}>
         <View style={styles.row}>
           <Text style={[styles.text, textStyle]}>Memory Game</Text>
           <Pressable
+            style={({ pressed }) => [
+              styles.infoPressable,
+              {
+                backgroundColor: pressed ? Color.teal : 'transparent',
+              },
+            ]}
             onPress={() => {
-              // Modal göster
+              setShowInfoModal(true)
             }}
           >
-            <Text style={[styles.text, textStyle]}>Info</Text>
+            <Text style={[styles.infoText, textStyle]}>i</Text>
           </Pressable>
         </View>
         <View style={styles.row}>
@@ -73,6 +71,18 @@ const App = observer(() => {
         </View>
         <Board cards={game.cards} />
       </View>
+      {/*  WinOverlay Oyun tamamlandıktan sonra ekrana gelecek olan bileşen */}
+      {
+        game.isCompleted && (
+          <WinOverlayTouch
+            game={game}
+            onClose={() => {
+              game.startGame()
+            }}
+          />
+        )
+      }
+      {showInfoModal && <InfoModal onClose={() => setShowInfoModal(false)} />}
     </SafeAreaView>
   );
 }
@@ -90,10 +100,21 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   text: {
-    fontSize: 22,
     fontWeight: '600',
     marginBottom: 16,
     marginHorizontal: 16,
+  },
+  infoPressable: {
+    borderWidth: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 35,
+    height: 35,
+    borderRadius: 25,
+    borderColor: Color.teal,
+  },
+  infoText: {
+    fontWeight: '600',
   },
 });
 
