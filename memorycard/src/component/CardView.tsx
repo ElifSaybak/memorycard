@@ -1,9 +1,10 @@
 import React from 'react'
-import { Pressable, StyleSheet, Text, View } from 'react-native'
+import { Pressable, Text, View } from 'react-native'
 import { Card } from '../game/Card'
 import { observer } from 'mobx-react-lite'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Animated, { useAnimatedStyle, useSharedValue, withSequence, withTiming } from "react-native-reanimated"
+import { cardView } from '../style/styles'
 
 const MATCH_STEP_DURATION = 120
 const NO_MATCH_STEP_DURATION = 120
@@ -99,16 +100,16 @@ interface CardViewProps {
 export const CardView = observer(
     ({ card, cardSize, margin }: CardViewProps) => {
         const { runMatchAnimation, matchAnimationStyle } = useMatchAnimation()
-        runMatchAnimation.value = card.isMatched //  kart eşleşme durumu(true) runMatchAnimation değerine atanır. noMatchAnimationStyle tetikler.
+        runMatchAnimation.value = card.isMatched // kart eşleşme durumu(true) runMatchAnimation değerine atanır. noMatchAnimationStyle tetikler.
 
         const { runNoMatchAnimation, noMatchAnimationStyle } = useNoMatchAnimation()
-        runNoMatchAnimation.value = card.isNotMatched         //  kart eşleşmeme durumu(true) runNoMatchAnimation değerine atanır. noMatchAnimationStyle tetikler.
+        runNoMatchAnimation.value = card.isNotMatched // kart eşleşmeme durumu(true) runNoMatchAnimation değerine atanır. noMatchAnimationStyle tetikler.
 
         return (
             <Animated.View style={[matchAnimationStyle, noMatchAnimationStyle]}>
                 <Pressable
                     style={[
-                        styles.container,
+                        cardView.container,
                         {
                             width: cardSize,
                             height: cardSize,
@@ -120,9 +121,9 @@ export const CardView = observer(
                         card.onClick()
                     }}>
                     {!card.isInVisible && ( // kart görünmeyen durumda değilse (görünürse)
-                        <View style={styles.center}>
+                        <View style={cardView.center}>
                             <Icon name={card.type} size={30} color="#fff" />
-                            <Text>{card.type}</Text>
+                            <Text style={cardView.textAlign}>{card.type}</Text>
                         </View>
                     )}
                 </Pressable>
@@ -131,13 +132,3 @@ export const CardView = observer(
     },
 )
 
-const styles = StyleSheet.create({
-    container: {
-        borderRadius: 8,
-    },
-    center: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    }
-})

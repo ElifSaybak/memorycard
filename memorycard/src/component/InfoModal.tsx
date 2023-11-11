@@ -1,6 +1,7 @@
-import { Modal, Pressable, StyleSheet, Text, View } from 'react-native'
+import { Modal, Pressable, Text, View } from 'react-native'
 import { Color } from '../style/Color'
 import React from 'react'
+import { infoModal } from '../style/styles'
 
 interface Props {
     onClose: () => void
@@ -9,16 +10,16 @@ interface Props {
 export function InfoModal({ onClose }: Props) {
     return (
         <Modal animationType="slide">
-            <View style={styles.modalContainer}>
+            <View style={infoModal.modalContainer}>
                 <Pressable
                     style={({ pressed }) => [
-                        styles.closePressable,
+                        infoModal.closePressable,
                         {
                             backgroundColor: pressed ? Color.redLight : Color.red,
                         },
                     ]}
                     onPress={onClose}>
-                    <Text style={styles.closeText} accessibilityHint="Close">
+                    <Text style={infoModal.closeText} accessibilityHint="Close">
                         X
                     </Text>
                 </Pressable>
@@ -28,23 +29,3 @@ export function InfoModal({ onClose }: Props) {
         </Modal>
     )
 }
-
-const styles = StyleSheet.create({
-    modalContainer: {
-        flex: 1,
-        padding: 40,
-        backgroundColor: Color.blue,
-    },
-    closePressable: {
-        backgroundColor: Color.red,
-        alignSelf: 'flex-end',
-        width: 50,
-        height: 50,
-        borderRadius: 40,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    closeText: {
-        fontSize: 20,
-    },
-})
