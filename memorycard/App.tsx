@@ -24,6 +24,8 @@ import { useIsPortrait } from './src/util/useIsPortrait';
 import { Color } from './src/style/Color';
 import { InfoModal } from './src/component/InfoModal';
 import { GAP_SIZE, useCardSize } from './src/style/sizes'
+import LinearGradient from 'react-native-linear-gradient'
+
 
 const App = observer(() => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -50,7 +52,12 @@ const App = observer(() => {
     <SafeAreaView style={[styles.fullHeight, backgroundStyle]}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
 
-      <View style={styles.container}>
+      <LinearGradient
+        colors={[Color.teal, Color.purple]}
+        useAngle={true}
+        angle={135}
+        style={[styles.container]}
+      >
         <View style={styles.spaceTop} />
         <View style={[styles.row1, { width: boardSize }]}>
           <Text style={[styles.title, textStyleTop]}>Memory Game</Text>
@@ -86,7 +93,7 @@ const App = observer(() => {
         </View>
         <Board cards={game.cards} />
         <View style={styles.spaceBottom} />
-      </View>
+      </LinearGradient>
       {/*  WinOverlay Oyun tamamlandıktan sonra ekrana gelecek olan bileşen */}
       {
         game.isCompleted && (
