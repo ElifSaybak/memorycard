@@ -1,3 +1,4 @@
+// renkleri tutan  Color dizi değişkeni
 export const Color = {
   dark: '#3d5161',
   blue: '#02b3e4',
@@ -6,4 +7,5 @@ export const Color = {
   white: '#fff',
   black: '#4d4d4d',
   gray: '#808080',
+  purple: '#aa7ecd',
 }
