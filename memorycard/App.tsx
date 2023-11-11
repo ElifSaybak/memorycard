@@ -159,6 +159,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 8,
     borderColor: Color.blue,
+    justifyContent: 'center',
   },
 })
 
