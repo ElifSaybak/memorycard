@@ -28,5 +28,6 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         padding: GAP_SIZE / 2,
         borderRadius: 10,
+        backgroundColor: 'rgb(255, 255, 255,0.8)',
     },
 })
