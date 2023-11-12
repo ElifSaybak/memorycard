@@ -43,8 +43,14 @@ const app = StyleSheet.create({
     textAlignVertical: 'center',
     fontWeight: 'bold',
   },
+  timerView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   textBottom: {
     fontWeight: 'bold',
+    marginRight: 7
   },
   lngPressable: {
     justifyContent: 'center',
@@ -52,7 +58,7 @@ const app = StyleSheet.create({
     padding: 8,
     borderWidth: 2,
     borderRadius: 10,
-    borderColor: Color.dun,
+    borderColor: Color.ash_gray,
   },
   lngText: {
     fontWeight: '600',
@@ -66,7 +72,7 @@ const app = StyleSheet.create({
     padding: 8,
     borderWidth: 2,
     borderRadius: 10,
-    borderColor: Color.hookers_green,
+    borderColor: Color.ash_gray,
     justifyContent: 'center',
     alignItems: 'center',
   },

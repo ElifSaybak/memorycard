@@ -27,6 +27,7 @@ import { app } from './src/style/styles';
 import { useTranslation } from 'react-i18next';
 import i18next from './src/services/i18next';
 import { Languages } from './src/component/Languages';
+import Icon from "react-native-vector-icons/MaterialCommunityIcons"
 
 
 const App = observer(() => {
@@ -59,10 +60,10 @@ const App = observer(() => {
 
   return (
     <SafeAreaView style={[app.fullHeight, backgroundStyle]}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} backgroundColor={Color.battleship_gray} />
 
       <LinearGradient
-        colors={[Color.ash_gray, Color.hookers_green]}
+        colors={[Color.hookers_green, Color.rust]}
         useAngle={true}
         angle={135}
         style={[app.container]}
@@ -75,7 +76,10 @@ const App = observer(() => {
 
         <View style={[app.textView, textViewStyle, { width: boardSize }]}>
           <Text style={[app.textBottom, textStyleBottom]}>{game.moves} {t("moves")}</Text>
-          <Text style={[app.textBottom, textStyleBottom]}>{game.timer.seconds} {t("seconds")}</Text>
+          <View style={app.timerView}>
+            <Text style={[app.textBottom, textStyleBottom]}>{game.timer.seconds} {t("seconds")}</Text>
+            <Icon name="timer-sand" size={25} color={Color.coyote} />
+          </View>
         </View>
 
         <Board cards={game.cards} />
@@ -85,20 +89,20 @@ const App = observer(() => {
             style={({ pressed }) => [
               app.restartPressable,
               {
-                backgroundColor: pressed ? Color.hookers_green : Color.khaki,
+                backgroundColor: pressed ? Color.ash_gray : Color.hookers_green,
               },
             ]}
             onPress={() => {
               game.startGame() // baştan başlat
             }}>
-            <Text style={[app.restartText,textStyleTop]}>{t("restart")}</Text>
+            <Text style={[app.restartText, textStyleTop]}>{t("restart")}</Text>
           </Pressable>
 
           <Pressable
             style={({ pressed }) => [
               app.lngPressable,
               {
-                backgroundColor: pressed ? Color.dun : Color.ash_gray,
+                backgroundColor: pressed ? Color.ash_gray : Color.hookers_green,
               },
             ]}
             onPress={() => {
