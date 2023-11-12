@@ -14,4 +14,5 @@ export interface Translation {
   Cake: string
   Leaf: string
   Anchor: string
+  game_info: string
 }

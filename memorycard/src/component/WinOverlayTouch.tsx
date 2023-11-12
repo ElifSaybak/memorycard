@@ -91,7 +91,7 @@ export const WinOverlayTouch = observer(({ game, onClose }: Props) => {
 
     const bottom = animatedBottomRef.current
 
-    const message = `With ${game.moves} moves and ${game.timer.seconds} seconds.`
+    const message = t('game_info', { moves: game.moves, seconds: game.timer.seconds });
 
     return (
         <Animated.View style={[winOverlayTouch.main, { height: screenHeight, bottom }]}>

@@ -4,7 +4,7 @@ const tr: Translation = {
   memory_game: 'Hafıza Oyunu',
   change_language: 'Dil Değiştir',
   restart: 'Baştan Başlat',
-  moves: 'hareket',
+  moves: 'hamle',
   seconds: 'saniye',
   congratulation: 'Tebrikler! Kazandınız!',
   move_up: 'Yukarı kaldır',
@@ -16,6 +16,7 @@ const tr: Translation = {
   Cake: 'Pasta',
   Leaf: 'Yaprak',
   Anchor: 'Çapa',
+  game_info: '{{moves}} hamle ve {{seconds}} saniye ile.',
 }
 
 export default tr

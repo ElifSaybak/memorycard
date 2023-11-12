@@ -181,6 +181,8 @@ const winOverlayTouch = StyleSheet.create({
     color: Color.white,
     fontWeight: 'bold',
     fontSize: 16,
+    maxWidth: '80%',
+    textAlign: 'center',
   },
   button: {
     backgroundColor: Color.ash_gray,
