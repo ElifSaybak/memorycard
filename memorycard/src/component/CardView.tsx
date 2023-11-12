@@ -124,7 +124,7 @@ export const CardView = observer(
                     {!card.isInVisible && ( // kart görünmeyen durumda değilse (görünürse)
                         <View style={cardView.center}>
                             <Icon name={card.type} size={30} color={Color.white} />
-                            <Text style={cardView.text}>{card.type}</Text>
+                            <Text style={cardView.text}>{card.typeName}</Text>
                         </View>
                     )}
                 </Pressable>

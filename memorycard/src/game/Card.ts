@@ -1,5 +1,5 @@
 import { action, makeObservable, observable, runInAction } from 'mobx'
-import { CardType } from './CardType'
+import { CardType, CardTypeInfo } from './CardType'
 import { Game } from './Game'
 import { CardState } from './CardState'
 import reactotron from 'reactotron-react-native'
@@ -14,6 +14,7 @@ const BACKGROUND_COLOR_NOT_MATCHED = Color.rust
 export class Card {
   // Card model sınıfı
   type: CardType // Kartın tipini tutar ve CardType enum'ından bir değer alır. Her kartın bir tipi olmalıdır ve bu, kartın hangi resme karşılık geldiğini belirleyecektir.
+  typeName: string
   state: CardState = CardState.Invisible // Kartın başlangıç durumu CardState.Invisible. Bu başlangıçta görünmez olduğu anlamına gelir.
   game: Game // kartın ait olduğu oyunun bir referansını tutar.
 
@@ -30,6 +31,7 @@ export class Card {
 
     // Yapıcı fonksiyonda alınan parametreler (type,game), sınıfın özelliklerine atanır.
     this.type = type // type parametresi, CardType tipindendir.
+    this.typeName = CardTypeInfo[type].typeName
     this.game = game // game parametresi, Game tipindendir.
   }
 
