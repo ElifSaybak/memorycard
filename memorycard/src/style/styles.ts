@@ -52,16 +52,21 @@ const app = StyleSheet.create({
     padding: 8,
     borderWidth: 2,
     borderRadius: 10,
-    borderColor: Color.teal,
+    borderColor: Color.dun,
   },
   lngText: {
     fontWeight: '600',
+    color: Color.white,
+  },
+  restartText: {
+    fontWeight: '600',
+    color: Color.white,
   },
   restartPressable: {
     padding: 8,
     borderWidth: 2,
     borderRadius: 10,
-    borderColor: Color.blue,
+    borderColor: Color.hookers_green,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -89,6 +94,7 @@ const cardView = StyleSheet.create({
   text: {
     textAlign: 'center',
     maxWidth: '80%',
+    color: Color.white
   },
 })
 
@@ -134,7 +140,7 @@ const winOverlayButton = StyleSheet.create({
     marginBottom: 10,
   },
   button: {
-    backgroundColor: Color.teal,
+    backgroundColor: Color.ash_gray,
     paddingHorizontal: 25,
     paddingVertical: 8,
     borderRadius: 10,
@@ -170,8 +176,13 @@ const winOverlayTouch = StyleSheet.create({
     fontSize: 18,
     marginBottom: 10,
   },
+  moveText: {
+    color: Color.white,
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
   button: {
-    backgroundColor: Color.teal,
+    backgroundColor: Color.ash_gray,
     paddingHorizontal: 25,
     paddingVertical: 8,
     borderRadius: 10,
@@ -187,7 +198,7 @@ const winOverlayTouch = StyleSheet.create({
     height: 100,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: Color.red,
+    backgroundColor: Color.rust,
     borderRadius: 50,
     marginTop: 50,
   },

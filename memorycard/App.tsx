@@ -62,7 +62,7 @@ const App = observer(() => {
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
 
       <LinearGradient
-        colors={[Color.teal, Color.purple]}
+        colors={[Color.ash_gray, Color.hookers_green]}
         useAngle={true}
         angle={135}
         style={[app.container]}
@@ -85,20 +85,20 @@ const App = observer(() => {
             style={({ pressed }) => [
               app.restartPressable,
               {
-                backgroundColor: pressed ? Color.blue : Color.blueLight,
+                backgroundColor: pressed ? Color.hookers_green : Color.khaki,
               },
             ]}
             onPress={() => {
               game.startGame() // baştan başlat
             }}>
-            <Text style={textStyleTop}>{t("restart")}</Text>
+            <Text style={[app.restartText,textStyleTop]}>{t("restart")}</Text>
           </Pressable>
 
           <Pressable
             style={({ pressed }) => [
               app.lngPressable,
               {
-                backgroundColor: pressed ? Color.teal : Color.tealLight,
+                backgroundColor: pressed ? Color.dun : Color.ash_gray,
               },
             ]}
             onPress={() => {

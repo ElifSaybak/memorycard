@@ -6,10 +6,10 @@ import reactotron from 'reactotron-react-native'
 import { NO_MATCH_ANIMATION_DURATION } from '../component/CardView'
 import { Color } from '../style/Color'
 
-const BACKGROUND_COLOR_INVISIBLE = Color.dark
-const BACKGROUND_COLOR_VISIBLE = Color.blue
-const BACKGROUND_COLOR_MATCHED = Color.teal
-const BACKGROUND_COLOR_NOT_MATCHED = Color.red
+const BACKGROUND_COLOR_INVISIBLE = Color.coyote
+const BACKGROUND_COLOR_VISIBLE = Color.hookers_green
+const BACKGROUND_COLOR_MATCHED = Color.ash_gray
+const BACKGROUND_COLOR_NOT_MATCHED = Color.rust
 
 export class Card {
   // Card model sınıfı

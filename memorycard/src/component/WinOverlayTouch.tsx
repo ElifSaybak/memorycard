@@ -99,7 +99,7 @@ export const WinOverlayTouch = observer(({ game, onClose }: Props) => {
             <Text style={winOverlayTouch.text}>{message}</Text>
             {/* Hareket edilecek bileşen */}
             <View {...panResponder.panHandlers} style={winOverlayTouch.moveUp}>
-                <Text>{t("move_up")}</Text>
+                <Text style={winOverlayTouch.moveText}>{t("move_up")}</Text>
             </View>
         </Animated.View>
     )
