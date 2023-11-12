@@ -12,13 +12,14 @@ import {
 import { observer } from 'mobx-react-lite'
 import { Game } from '../game/Game'
 import { winOverlayTouch } from '../style/styles'
-
+import { useTranslation } from 'react-i18next'
 interface Props {
     game: Game
     onClose: () => void
 }
 
 export const WinOverlayTouch = observer(({ game, onClose }: Props) => {
+    const { t } = useTranslation()
     // useWindowDimensions hook'u, cihazın ekran boyutlarını almak için kullanılıyor. 
     const { height: screenHeight } = useWindowDimensions() // screenHeight değişkeni, ekranın yüksekliğini saklar.
 
@@ -94,12 +95,11 @@ export const WinOverlayTouch = observer(({ game, onClose }: Props) => {
 
     return (
         <Animated.View style={[winOverlayTouch.main, { height: screenHeight, bottom }]}>
-            <Text style={winOverlayTouch.title}>Congratulations! You won!</Text>
+            <Text style={winOverlayTouch.title}>{t("congratulation")}</Text>
             <Text style={winOverlayTouch.text}>{message}</Text>
-            <Text style={winOverlayTouch.text}>Woooooo!</Text>
             {/* Hareket edilecek bileşen */}
             <View {...panResponder.panHandlers} style={winOverlayTouch.moveUp}>
-                <Text>Move up</Text>
+                <Text>{t("move_up")}</Text>
             </View>
         </Animated.View>
     )

@@ -21,7 +21,6 @@ import { game } from './src/game/Game';
 import { WinOverlayTouch } from './src/component/WinOverlayTouch';
 import { useIsPortrait } from './src/util/useIsPortrait';
 import { Color } from './src/style/Color';
-// import { InfoModal } from './src/component/InfoModal';
 import { useCardSize } from './src/style/sizes'
 import LinearGradient from 'react-native-linear-gradient'
 import { app } from './src/style/styles';
@@ -41,19 +40,20 @@ const App = observer(() => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  const textStyleTop = { fontSize: isPortrait ? 22 : 18 }
-  const textStyleBottom = { fontSize: isPortrait ? 24 : 20 }
-  const row2Style = {
-    marginTop: isPortrait ? 12 : 3,
-    marginBottom: isPortrait ? 15 : 2,
+  const textStyleTitle = { fontSize: isPortrait ? 24 : 20 }
+  const textStyleTop = { fontSize: isPortrait ? 16 : 14 }
+  const textStyleBottom = { fontSize: isPortrait ? 16 : 14 }
+  const textViewStyle = {
+    marginTop: isPortrait ? 20 : 10,
+    marginBottom: isPortrait ? 25 : 12,
   }
 
   useEffect(() => {
     game.startGame() // İlk açıldığında oyunu başlatır
   }, [])
 
-  const changeLang = (lng: string) => {
-    i18next.changeLanguage(lng)
+  const changeLang = (lng: string) => { // lng seçilen dil
+    i18next.changeLanguage(lng) // Dili değiştirir.
     setVisible(false)
   }
 
@@ -67,9 +67,20 @@ const App = observer(() => {
         angle={135}
         style={[app.container]}
       >
-        <View style={app.spaceTop} />
-        <Text style={[app.title, textStyleTop]}>{t("memory_game")}</Text>
-        <View style={[app.row1, { width: boardSize }]}>
+        <View style={app.titleView}>
+          <Text style={[app.title, textStyleTitle]}>{t("memory_game")}</Text>
+        </View>
+
+        {/* <View style={app.spaceTop} /> */}
+
+        <View style={[app.textView, textViewStyle, { width: boardSize }]}>
+          <Text style={[app.textBottom, textStyleBottom]}>{game.moves} {t("moves")}</Text>
+          <Text style={[app.textBottom, textStyleBottom]}>{game.timer.seconds} {t("seconds")}</Text>
+        </View>
+
+        <Board cards={game.cards} />
+
+        <View style={[app.buttonView, { width: boardSize }]}>
           <Pressable
             style={({ pressed }) => [
               app.restartPressable,
@@ -80,8 +91,9 @@ const App = observer(() => {
             onPress={() => {
               game.startGame() // baştan başlat
             }}>
-            <Text style={textStyleTop}>Restart</Text>
+            <Text style={textStyleTop}>{t("restart")}</Text>
           </Pressable>
+
           <Pressable
             style={({ pressed }) => [
               app.lngPressable,
@@ -96,11 +108,7 @@ const App = observer(() => {
             <Text style={[app.lngText, textStyleTop]}>{t("change_language")}</Text>
           </Pressable>
         </View>
-        <View style={[app.row2, row2Style, { width: boardSize }]}>
-          <Text style={[app.textBottom, textStyleBottom]}>{game.moves} moves</Text>
-          <Text style={[app.textBottom, textStyleBottom]}>{game.timer.seconds} s</Text>
-        </View>
-        <Board cards={game.cards} />
+
         <View style={app.spaceBottom} />
       </LinearGradient>
       {/*  WinOverlay Oyun tamamlandıktan sonra ekrana gelecek olan bileşen */}
@@ -114,7 +122,9 @@ const App = observer(() => {
           />
         )
       }
-      {visible && <Languages onClose={() => setVisible(false)} changeLng={changeLang} />}
+      {visible && (
+        <Languages onClose={() => setVisible(false)} changeLng={changeLang} />
+      )}
     </SafeAreaView>
   );
 }

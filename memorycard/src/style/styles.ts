@@ -16,16 +16,20 @@ const app = StyleSheet.create({
   spaceBottom: {
     flex: 2,
   },
-  row1: {
+  buttonView: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: GAP_SIZE,
+    position: 'absolute',
+    bottom: GAP_SIZE,
   },
-  row2: {
+  textView: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     paddingHorizontal: GAP_SIZE,
+    backgroundColor: Color.white,
+    padding: 3
   },
   titleView: {
     width: '100%',
