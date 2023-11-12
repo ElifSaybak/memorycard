@@ -19,6 +19,7 @@ const app = StyleSheet.create({
   row1: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     paddingHorizontal: GAP_SIZE,
   },
   row2: {
@@ -26,8 +27,17 @@ const app = StyleSheet.create({
     justifyContent: 'space-evenly',
     paddingHorizontal: GAP_SIZE,
   },
+  titleView: {
+    width: '100%',
+    height: 60,
+    padding: 10,
+    backgroundColor: Color.white,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   title: {
     textAlignVertical: 'center',
+    fontWeight: 'bold',
   },
   textBottom: {
     fontWeight: 'bold',
@@ -35,22 +45,21 @@ const app = StyleSheet.create({
   lngPressable: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 5,
-    paddingBottom: 5,
+    padding: 8,
     borderWidth: 2,
-    borderRadius: 8,
+    borderRadius: 10,
     borderColor: Color.teal,
   },
   lngText: {
     fontWeight: '600',
   },
   restartPressable: {
-    paddingHorizontal: 5,
-    paddingBottom: 5,
+    padding: 8,
     borderWidth: 2,
-    borderRadius: 8,
+    borderRadius: 10,
     borderColor: Color.blue,
     justifyContent: 'center',
+    alignItems: 'center',
   },
 })
 
@@ -66,7 +75,7 @@ const board = StyleSheet.create({
 
 const cardView = StyleSheet.create({
   container: {
-    borderRadius: 8,
+    borderRadius: 10,
   },
   center: {
     flex: 1,
@@ -124,7 +133,7 @@ const winOverlayButton = StyleSheet.create({
     backgroundColor: Color.teal,
     paddingHorizontal: 25,
     paddingVertical: 8,
-    borderRadius: 5,
+    borderRadius: 10,
     marginTop: 5,
   },
   buttonText: {
@@ -161,7 +170,7 @@ const winOverlayTouch = StyleSheet.create({
     backgroundColor: Color.teal,
     paddingHorizontal: 25,
     paddingVertical: 8,
-    borderRadius: 5,
+    borderRadius: 10,
     marginTop: 5,
   },
   buttonText: {
