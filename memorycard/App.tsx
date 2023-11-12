@@ -21,17 +21,21 @@ import { game } from './src/game/Game';
 import { WinOverlayTouch } from './src/component/WinOverlayTouch';
 import { useIsPortrait } from './src/util/useIsPortrait';
 import { Color } from './src/style/Color';
-import { InfoModal } from './src/component/InfoModal';
+// import { InfoModal } from './src/component/InfoModal';
 import { useCardSize } from './src/style/sizes'
 import LinearGradient from 'react-native-linear-gradient'
 import { app } from './src/style/styles';
+import { useTranslation } from 'react-i18next';
+import i18next from './src/services/i18next';
+import { Languages } from './src/component/Languages';
 
 
 const App = observer(() => {
   const isDarkMode = useColorScheme() === 'dark';
   const isPortrait = useIsPortrait() // portre (dikey) - yatay
   const { boardSize } = useCardSize()
-  const [showInfoModal, setShowInfoModal] = useState(false)
+  const [visible, setVisible] = useState(false)
+  const { t } = useTranslation()
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -48,6 +52,11 @@ const App = observer(() => {
     game.startGame() // İlk açıldığında oyunu başlatır
   }, [])
 
+  const changeLang = (lng: string) => {
+    i18next.changeLanguage(lng)
+    setVisible(false)
+  }
+
   return (
     <SafeAreaView style={[app.fullHeight, backgroundStyle]}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
@@ -59,8 +68,8 @@ const App = observer(() => {
         style={[app.container]}
       >
         <View style={app.spaceTop} />
+        <Text style={[app.title, textStyleTop]}>{t("memory_game")}</Text>
         <View style={[app.row1, { width: boardSize }]}>
-          <Text style={[app.title, textStyleTop]}>Memory Game</Text>
           <Pressable
             style={({ pressed }) => [
               app.restartPressable,
@@ -75,16 +84,16 @@ const App = observer(() => {
           </Pressable>
           <Pressable
             style={({ pressed }) => [
-              app.infoPressable,
+              app.lngPressable,
               {
                 backgroundColor: pressed ? Color.teal : Color.tealLight,
               },
             ]}
             onPress={() => {
-              setShowInfoModal(true)
+              setVisible(true)
             }}
           >
-            <Text style={[app.infoText, textStyleTop]}>i</Text>
+            <Text style={[app.lngText, textStyleTop]}>{t("change_language")}</Text>
           </Pressable>
         </View>
         <View style={[app.row2, row2Style, { width: boardSize }]}>
@@ -105,7 +114,7 @@ const App = observer(() => {
           />
         )
       }
-      {showInfoModal && <InfoModal onClose={() => setShowInfoModal(false)} />}
+      {visible && <Languages onClose={() => setVisible(false)} changeLng={changeLang} />}
     </SafeAreaView>
   );
 }

@@ -32,16 +32,16 @@ const app = StyleSheet.create({
   textBottom: {
     fontWeight: 'bold',
   },
-  infoPressable: {
+  lngPressable: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: 35,
-    height: 35,
+    paddingHorizontal: 5,
+    paddingBottom: 5,
     borderWidth: 2,
-    borderRadius: 25,
+    borderRadius: 8,
     borderColor: Color.teal,
   },
-  infoText: {
+  lngText: {
     fontWeight: '600',
   },
   restartPressable: {
@@ -75,27 +75,25 @@ const cardView = StyleSheet.create({
   },
   text: {
     textAlign: 'center',
-    maxWidth: "80%"
+    maxWidth: '80%',
   },
 })
 
-const infoModal = StyleSheet.create({
-  modalContainer: {
+const languages = StyleSheet.create({
+  languagesList: {
     flex: 1,
-    padding: 40,
-    backgroundColor: Color.blue,
-  },
-  closePressable: {
-    backgroundColor: Color.red,
-    alignSelf: 'flex-end',
-    width: 50,
-    height: 50,
-    borderRadius: 40,
     justifyContent: 'center',
-    alignItems: 'center',
+    padding: 10,
+    backgroundColor: 'gray',
   },
-  closeText: {
-    fontSize: 20,
+  languageButton: {
+    padding: 10,
+    borderBottomColor: 'white',
+    borderBottomWidth: 1,
+  },
+  langName: {
+    fontSize: 18,
+    color: 'white',
   },
 })
 
@@ -182,4 +180,4 @@ const winOverlayTouch = StyleSheet.create({
   },
 })
 
-export { app, board, cardView, infoModal, winOverlayButton, winOverlayTouch }
+export { app, board, cardView, languages, winOverlayButton, winOverlayTouch }
