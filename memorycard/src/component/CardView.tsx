@@ -123,12 +123,16 @@ export const CardView = observer(
                     onPress={() => {
                         card.onClick()
                     }}>
-                    {!card.isInVisible && ( // kart görünmeyen durumda değilse (görünürse)
+                    {!card.isInVisible ? ( // kart görünmeyen durumda değilse (görünürse)
                         <View style={cardView.center}>
                             <Icon name={card.type} size={30} color={Color.white} />
                             <Text style={cardView.text}>{t(`${card.typeName}`)}</Text>
                         </View>
-                    )}
+                    ) :
+                        <View style={cardView.center}>
+                            <Icon name="question" size={40} color={Color.white} />
+                        </View>
+                    }
                 </Pressable>
             </Animated.View>
         )
