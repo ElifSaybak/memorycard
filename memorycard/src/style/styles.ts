@@ -29,7 +29,7 @@ const app = StyleSheet.create({
     justifyContent: 'space-evenly',
     paddingHorizontal: GAP_SIZE,
     backgroundColor: Color.white,
-    padding: 3
+    padding: 3,
   },
   titleView: {
     width: '100%',
@@ -94,7 +94,8 @@ const cardView = StyleSheet.create({
   text: {
     textAlign: 'center',
     maxWidth: '80%',
-    color: Color.white
+    color: Color.white,
+    marginTop: 3,
   },
 })
 

@@ -8,6 +8,14 @@ const en: Translation = {
   seconds: 'seconds',
   congratulation: 'Congratulations! You won!',
   move_up: 'Move Up',
+  Music : 'Music',
+  Diamond : 'Diamond',
+  Bicycle : 'Bicycle',
+  Camera : 'Camera',
+  Automobile : 'Automobile',
+  Cake : 'Cake',
+  Leaf : 'Leaf',
+  Anchor : 'Anchor',
 }
 
 export default en

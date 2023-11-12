@@ -8,6 +8,14 @@ const ku: Translation = {
   seconds: 'saniya',
   congratulation: 'Pîroz be! Te bi ser ket!',
   move_up: 'Derketina Jor',
+  Music: 'Mûzîk',
+  Diamond: 'Cewher',
+  Bicycle: 'Duçerxe',
+  Camera: 'Kamere',
+  Automobile: 'Tirimpêl',
+  Cake: 'Paste',
+  Leaf: 'Pel',
+  Anchor: 'Lenger',
 }
 
-export default ku;
+export default ku

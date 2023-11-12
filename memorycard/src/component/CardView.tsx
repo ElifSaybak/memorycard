@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import Animated, { useAnimatedStyle, useSharedValue, withSequence, withTiming } from "react-native-reanimated"
 import { cardView } from '../style/styles'
 import { Color } from '../style/Color'
+import { useTranslation } from 'react-i18next'
 
 const MATCH_STEP_DURATION = 120
 const NO_MATCH_STEP_DURATION = 120
@@ -100,6 +101,7 @@ interface CardViewProps {
 // Observer izlenen verilere bağlar, değişikliklere yanıt olarak tekrar render eder.
 export const CardView = observer(
     ({ card, cardSize, margin }: CardViewProps) => {
+        const { t } = useTranslation()
         const { runMatchAnimation, matchAnimationStyle } = useMatchAnimation()
         runMatchAnimation.value = card.isMatched // kart eşleşme durumu(true) runMatchAnimation değerine atanır. noMatchAnimationStyle tetikler.
 
@@ -124,7 +126,7 @@ export const CardView = observer(
                     {!card.isInVisible && ( // kart görünmeyen durumda değilse (görünürse)
                         <View style={cardView.center}>
                             <Icon name={card.type} size={30} color={Color.white} />
-                            <Text style={cardView.text}>{card.typeName}</Text>
+                            <Text style={cardView.text}>{t(`${card.typeName}`)}</Text>
                         </View>
                     )}
                 </Pressable>

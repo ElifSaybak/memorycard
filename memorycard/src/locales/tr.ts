@@ -8,6 +8,14 @@ const tr: Translation = {
   seconds: 'saniye',
   congratulation: 'Tebrikler! Kazandınız!',
   move_up: 'Yukarı kaldır',
+  Music: 'Müzik',
+  Diamond: 'Elmas',
+  Bicycle: 'Bisiklet',
+  Camera: 'Kamera',
+  Automobile: 'Otomobil',
+  Cake: 'Pasta',
+  Leaf: 'Yaprak',
+  Anchor: 'Çapa',
 }
 
-export default tr;
+export default tr
