@@ -17,6 +17,10 @@ const ku: Translation = {
   Leaf: 'Pel',
   Anchor: 'Lenger',
   game_info: 'Bi {{moves}} tevger û {{seconds}} çirkeyan.',
+  present_warn: 'Ji bo surprîz qutiya diyariyê vekin :D',
+  gift_box:"QUTIYA DIYARIYÊ",
+  present_message: "Beta HCG: 67,84",
+  present_message_continue: "Ez ducanî me"
 }
 
 export default ku

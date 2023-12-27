@@ -17,6 +17,10 @@ const en: Translation = {
   Leaf: 'Leaf',
   Anchor: 'Anchor',
   game_info: 'With {{moves}} moves and {{seconds}} seconds.',
+  present_warn: 'Open the gift box for surprise :D',
+  gift_box: "GIFT BOX",
+  present_message: "Beta HCG: 67,84",
+  present_message_continue: "I am pregnant"
 }
 
 export default en

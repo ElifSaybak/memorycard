@@ -13,6 +13,7 @@ import { observer } from 'mobx-react-lite'
 import { Game } from '../game/Game'
 import { winOverlayTouch } from '../style/styles'
 import { useTranslation } from 'react-i18next'
+import GiftBox from './GiftBox'
 interface Props {
     game: Game
     onClose: () => void
@@ -91,13 +92,14 @@ export const WinOverlayTouch = observer(({ game, onClose }: Props) => {
 
     const bottom = animatedBottomRef.current
 
-    const message = t('game_info', { moves: game.moves, seconds: game.timer.seconds });
+    const message =  t('game_info', { moves: game.moves, seconds: game.timer.seconds })
 
     return (
         <Animated.View style={[winOverlayTouch.main, { height: screenHeight, bottom }]}>
             <Text style={winOverlayTouch.title}>{t("congratulation")}</Text>
             <Text style={winOverlayTouch.text}>{message}</Text>
-            {/* Hareket edilecek bileşen */}
+            <Text style={winOverlayTouch.text2}>{t("present_warn")}</Text>
+            <GiftBox/>
             <View {...panResponder.panHandlers} style={winOverlayTouch.moveUp}>
                 <Text style={winOverlayTouch.moveText}>{t("move_up")}</Text>
             </View>

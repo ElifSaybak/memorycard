@@ -15,4 +15,8 @@ export interface Translation {
   Leaf: string
   Anchor: string
   game_info: string
+  present_warn: string
+  gift_box: string
+  present_message: string
+  present_message_continue: string 
 }

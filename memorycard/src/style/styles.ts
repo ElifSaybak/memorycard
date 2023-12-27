@@ -50,7 +50,7 @@ const app = StyleSheet.create({
   },
   textBottom: {
     fontWeight: 'bold',
-    marginRight: 7
+    marginRight: 7,
   },
   lngPressable: {
     justifyContent: 'center',
@@ -183,10 +183,18 @@ const winOverlayTouch = StyleSheet.create({
     fontSize: 18,
     marginBottom: 10,
   },
+  text2: {
+    color: Color.hookers_green,
+    fontWeight: 'bold',
+    fontSize: 18,
+    marginVertical: 10,
+    fontStyle: 'italic',
+  },
+
   moveText: {
     color: Color.white,
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 12,
     maxWidth: '80%',
     textAlign: 'center',
   },
@@ -203,14 +211,107 @@ const winOverlayTouch = StyleSheet.create({
     fontSize: 18,
   },
   moveUp: {
-    width: 100,
-    height: 100,
+    width: 80,
+    height: 80,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: Color.hookers_green,
     borderRadius: 50,
-    marginTop: 50,
+    marginTop: 80,
   },
 })
 
-export { app, board, cardView, languages, winOverlayButton, winOverlayTouch }
+const giftBox = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  closeGift: {
+    marginTop: 40,
+    width: 80,
+    height: 80,
+  },
+  openGift: {
+    marginTop: 25,
+    width: 110,
+    height: 110,
+    marginRight: 25,
+  },
+})
+
+const presentMessage = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  openModalText: {
+    fontSize: 18,
+    color: 'blue',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    alignItems: 'center',
+    height: 200,
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    width: '80%',
+  },
+  closeModal: {
+    position: 'absolute',
+    right: 15,
+    bottom: 10,
+  },
+  modalTitleView: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#ebebeb',
+    marginBottom: 20,
+  },
+  modalTitle: {
+    fontSize: 20,
+    marginBottom: 10,
+    fontWeight: 'bold',
+    color: Color.hookers_green,
+  },
+  modalText: {
+    fontSize: 14,
+    marginBottom: 10,
+    fontWeight: 'bold',
+    color: Color.coyote,
+  },
+  moreText: {
+    fontSize: 18,
+    marginTop: 10,
+    fontWeight: 'bold',
+    fontStyle: 'italic',
+    color: Color.rust,
+  },
+  readMoreText: {
+    color: Color.hookers_green,
+    textDecorationLine: 'underline',
+    marginTop: 10,
+  },
+  closeModalText: {
+    color: Color.hookers_green,
+    fontSize: 14,
+    marginTop: 20,
+    fontWeight: 'bold',
+  },
+})
+
+export {
+  app,
+  board,
+  cardView,
+  languages,
+  winOverlayButton,
+  winOverlayTouch,
+  giftBox,
+  presentMessage,
+}

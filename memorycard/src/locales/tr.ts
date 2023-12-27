@@ -17,6 +17,10 @@ const tr: Translation = {
   Leaf: 'Yaprak',
   Anchor: 'Çapa',
   game_info: '{{moves}} hamle ve {{seconds}} saniye ile.',
+  gift_box:"HEDİYE KUTUSU",
+  present_warn: 'Süpriz için hediye kutusunu açın :D',
+  present_message: 'Beta HCG: 67,84',
+  present_message_continue: 'Hamileyim',
 }
 
 export default tr
