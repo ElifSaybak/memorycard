@@ -75,10 +75,10 @@ const App = observer(() => {
         {/* <View style={app.spaceTop} /> */}
 
         <View style={[app.textView, textViewStyle, { width: boardSize }]}>
-          <Text style={[app.textBottom, textStyleBottom]}>{game.moves} {t("moves")}</Text>
+          <Text style={[app.textBottom, textStyleBottom]}>{t("moves")}: {game.moves}</Text>
           <View style={app.timerView}>
-            <Text style={[app.textBottom, textStyleBottom]}>{game.timer.seconds} {t("seconds")}</Text>
-            <Icon name="timer-sand" size={25} color={Color.coyote} />
+            <Text style={[app.textBottom, textStyleBottom]}>{t("seconds")}: {game.timer.seconds}</Text>
+            <Icon name="timer-sand" size={20} color={Color.coyote} />
           </View>
         </View>
 

@@ -207,7 +207,7 @@ const winOverlayTouch = StyleSheet.create({
     height: 100,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: Color.rust,
+    backgroundColor: Color.hookers_green,
     borderRadius: 50,
     marginTop: 50,
   },
